@@ -13,8 +13,14 @@ import java.io.FileNotFoundException
 
 class QuoteManagerTest {
 
+    lateinit var context: Context
+    lateinit var quoteManager: QuoteManager
     @Before
     fun setUp() {
+         context= ApplicationProvider.getApplicationContext<Context>()
+        quoteManager= QuoteManager()
+
+
     }
 
     @After
@@ -25,30 +31,23 @@ class QuoteManagerTest {
 
     @Test(expected = FileNotFoundException::class)
     fun `populate_wrong_json_file`() {
-        val quoteManger= QuoteManager()
-        val context= ApplicationProvider.getApplicationContext<Context>()
-        quoteManger.populateQuotefromAssets(context,"")
+            quoteManager.populateQuotefromAssets(context,"")
 
     }
     @Test(expected = JsonSyntaxException::class)
     fun `populate_invalid_json_file`() {
-        val quoteManger= QuoteManager()
-        val context= ApplicationProvider.getApplicationContext<Context>()
-        quoteManger.populateQuotefromAssets(context,"mal.json")
+        quoteManager.populateQuotefromAssets(context,"mal.json")
 
     }
     @Test
     fun `populate_valid_json_file`() {
-        val quoteManger= QuoteManager()
-        val context= ApplicationProvider.getApplicationContext<Context>()
-        quoteManger.populateQuotefromAssets(context,"quotes.json")
-        assertEquals(102,quoteManger.quoteList.size)
+        quoteManager.populateQuotefromAssets(context,"quotes.json")
+        assertEquals(102,quoteManager.quoteList.size)
 
     }
     @Test
     fun testPreviousQuote_expected_correct_Quote(){
         //arrange
-        val quoteManager= QuoteManager()
         quoteManager.populateQuotes(
             arrayOf(
                 Quote("This is the first Quote","1"),
@@ -64,7 +63,6 @@ class QuoteManagerTest {
     @Test
     fun testNextQuote_expected_correct_Quote(){
         //arrange
-        val quoteManager= QuoteManager()
         quoteManager.populateQuotes(
             arrayOf(
                 Quote("This is the first Quote","1"),

@@ -36,6 +36,7 @@ class ReverseStringTest {
     @Test(expected = IllegalArgumentException::class)
     fun `reverse string with null value`() {
         val result= helper.reverseString(null)
-        assertEquals("diordna",result)
+      //  assertEquals("diordna",result)
     }
+
 }

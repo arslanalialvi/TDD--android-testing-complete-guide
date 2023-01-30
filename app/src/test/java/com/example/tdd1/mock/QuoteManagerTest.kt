@@ -12,6 +12,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.util.Objects
 
 class QuoteManagerTest {
     @Mock
@@ -24,7 +25,7 @@ class QuoteManagerTest {
     }
     @Test
     fun `mock quote manager json`(){
-        val testStream= QuoteManager::class.java.getResourceAsStream("/quotes.json")
+        val testStream= QuoteUseCaseTest::class.java.getResourceAsStream("/quots.json")
         doReturn(assetManager).`when`(context).assets
         Mockito.`when`(context.assets.open(anyString())).thenReturn(testStream )
         val sut= QuoteManager()

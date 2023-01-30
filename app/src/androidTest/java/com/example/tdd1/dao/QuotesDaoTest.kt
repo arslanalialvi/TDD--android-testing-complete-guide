@@ -23,13 +23,12 @@ class QuotesDaoTest {
 
     @Before
     fun setUp(){
-//        quoteDatabase= Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(),QuoteDatabase::class.java).allowMainThreadQueries().build()
-//        quoteDao=quoteDatabase.quoteDao()
+        quoteDatabase= Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), QuoteDatabase::class.java).allowMainThreadQueries().build()
+        quoteDao=quoteDatabase.quoteDao()
     }
     @Test
-    fun insertQuote_expectedSingleQuote()= runBlocking {
-        quoteDatabase= Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(),QuoteDatabase::class.java).allowMainThreadQueries().build()
-        quoteDao=quoteDatabase.quoteDao()
+    fun insertQuote_expectedSingleQuote()= runBlocking() {
+
         val quote= QuoteEntity(0,"Test quote","Arslan")
         quoteDao.insertQuote(quote)
         val result= quoteDao.getQuote().getOrAwaitValue()
@@ -46,6 +45,6 @@ class QuotesDaoTest {
     }
     @After
     fun tearDown(){
-      //  quoteDatabase.close()
+        quoteDatabase.close()
     }
 }
